@@ -3,7 +3,7 @@ cloud:
     region:
       static: "us-east-1"
 
-signer.script: "C:/Users/alejandro/Documents/git/Signer/sign-metadata.sh"
+signer.script: "/home/ec2-user/sign-metadata.sh"
 spring:
   autoconfigure:
     exclude:

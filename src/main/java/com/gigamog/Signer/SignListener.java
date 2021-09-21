@@ -31,10 +31,15 @@ public class SignListener {
         try {
             for (Integer metadatum : metadata.getMetadata()) {
                 LOGGER.info("Running");
-
                 ProcessBuilder pb = new ProcessBuilder(signerScript + " " + metadata.env + " " + metadatum);
                 Process p = pb.start();     // Start the process.
                 p.waitFor();                // Wait for the process to finish.
+                try(java.io.InputStream is = p.getInputStream()) {
+                    java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
+                    if (s.hasNext()) {
+                        LOGGER.info(s.next());
+                    }
+                }
                 LOGGER.info("Script executed successfully");
             }
 
