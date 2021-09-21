@@ -29,10 +29,15 @@ public class SignListener {
     @SqsListener(value = "signs", deletionPolicy = SqsMessageDeletionPolicy.ON_SUCCESS)
     public void onS3UploadEvent(@Payload Metadata metadata) {
         try {
-            ProcessBuilder pb = new ProcessBuilder(signerScript);
-            Process p = pb.start();     // Start the process.
-            p.waitFor();                // Wait for the process to finish.
-            LOGGER.info("Script executed successfully");
+            for (Integer metadatum : metadata.getMetadata()) {
+                LOGGER.info("Running");
+
+                ProcessBuilder pb = new ProcessBuilder(signerScript + " " + metadata.env + " " + metadatum);
+                Process p = pb.start();     // Start the process.
+                p.waitFor();                // Wait for the process to finish.
+                LOGGER.info("Script executed successfully");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
