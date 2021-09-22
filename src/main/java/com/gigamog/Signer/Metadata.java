@@ -3,14 +3,14 @@ package com.gigamog.Signer;
 import java.util.List;
 
 public class Metadata {
-    List<Integer> metadata;
+    List<String> metadata;
     String env;
 
-    public List<Integer> getMetadata() {
+    public List<String> getMetadata() {
         return metadata;
     }
 
-    public void setMetadata(List<Integer> metadata) {
+    public void setMetadata(List<String> metadata) {
         this.metadata = metadata;
     }
 

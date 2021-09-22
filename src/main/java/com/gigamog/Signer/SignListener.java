@@ -29,9 +29,9 @@ public class SignListener {
     @SqsListener(value = "signs", deletionPolicy = SqsMessageDeletionPolicy.ON_SUCCESS)
     public void onS3UploadEvent(@Payload Metadata metadata) {
         try {
-            for (Integer metadatum : metadata.getMetadata()) {
+            for (String metadatum : metadata.getMetadata()) {
                 LOGGER.info("Running");
-                ProcessBuilder pb = new ProcessBuilder(signerScript, metadata.env, metadatum.toString());
+                ProcessBuilder pb = new ProcessBuilder(signerScript, metadata.env, metadatum);
                 Process p = pb.start();     // Start the process.
                 p.waitFor();                // Wait for the process to finish.
                 try(java.io.InputStream is = p.getInputStream()) {
