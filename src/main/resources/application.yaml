@@ -4,9 +4,15 @@ cloud:
       static: "us-east-1"
 
 signer.script: "/home/ec2-user/sign-metadata.sh"
+
 spring:
   autoconfigure:
     exclude:
       - org.springframework.cloud.aws.autoconfigure.context.ContextInstanceDataAutoConfiguration
       - org.springframework.cloud.aws.autoconfigure.context.ContextStackAutoConfiguration
       - org.springframework.cloud.aws.autoconfigure.context.ContextRegionProviderAutoConfiguration
+
+logging:
+  file:
+    name: Signer.log
+    path: /home/ec2-user
