@@ -31,7 +31,7 @@ public class SignListener {
         try {
             for (Integer metadatum : metadata.getMetadata()) {
                 LOGGER.info("Running");
-                ProcessBuilder pb = new ProcessBuilder(signerScript + " " + metadata.env + " " + metadatum);
+                ProcessBuilder pb = new ProcessBuilder(signerScript, metadata.env, metadatum.toString());
                 Process p = pb.start();     // Start the process.
                 p.waitFor();                // Wait for the process to finish.
                 try(java.io.InputStream is = p.getInputStream()) {
